@@ -1,0 +1,20 @@
+.homeContainer {
+    position: relative;
+}
+
+.homeContainer h1 {
+    margin-top: 0;
+    color: white;
+}
+
+.background {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    z-index: -1;
+}
