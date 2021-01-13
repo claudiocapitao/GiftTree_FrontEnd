@@ -1,0 +1,10 @@
+.card{
+    background: rgb(225, 225, 233) !important;
+    margin:2px;
+    text-align: center;
+    font-size: 80%;
+}
+
+.CardButton{
+    background: rgb(150, 179, 192) !important;
+}

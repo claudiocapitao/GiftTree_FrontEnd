@@ -1,18 +1,25 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./App.css";
-import { Home } from "./pages/Home";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import LandingPage from './components/LandingPage.js';
+import LogInPage from './components/LogInPage.js'
+import RegisterPage from './components/RegisterPage.js'
+import AboutPage from './components/AboutPage.js'
+import MarketplacePage from './components/MarketplacePage.js'
+import UserAccountPage from './components/UserAccountPage.js'
+
 function App() {
     return (
         <div className="App">
             <Router>
                 <Switch>
-                    <Route path="/" exact>
-                        <Home />
-                    </Route>
-
-                    <Route path="*">
-                        <img src="https://media3.giphy.com/media/9J7tdYltWyXIY/giphy.gif?cid=ecf05e47nxxxd9893gxmif28x7bmpl96w5et37fvkbmymj0s&rid=giphy.gif" />
-                    </Route>
+                    <Route exact path="/" component={LandingPage} />
+                    <Route path="/login" component={LogInPage} /> {/* the same: <Route path="/login"><LogInPage/></Route> */}
+                    <Route path="/register" component={RegisterPage} />
+                    <Route path="/about" component={AboutPage} />
+                    <Route path="/marketplace" component={MarketplacePage} />
+                    <Route path="/useraccount" component={UserAccountPage} />
                 </Switch>
             </Router>
         </div>
