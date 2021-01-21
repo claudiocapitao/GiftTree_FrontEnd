@@ -1,13 +1,18 @@
 class Tree {
-    constructor(treeName, treeSpecies, country, co2Emitions, price, imageLink) {
-
+    constructor(
+        treeName,
+        treeSpecies,
+        country,
+        co2Emissions,
+        price,
+        imageLink
+    ) {
         this.treeName = treeName;
         this.treeSpecies = treeSpecies;
         this.country = country;
-        this.co2Emitions = co2Emitions;
+        this.co2Emissions = co2Emissions;
         this.price = price;
-        this.imageLink = imageLink
-
+        this.imageLink = imageLink;
     }
 }
 
