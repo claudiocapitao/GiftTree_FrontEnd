@@ -16,7 +16,11 @@ function isRetina() {
 export function Home() {
     return (
         <div className={styles.homeContainer}>
-            <img className={styles.background} src={isRetina()} />
+            <img
+                className={styles.background}
+                alt="home-page-background"
+                src={isRetina()}
+            />
 
             <div style={{ paddingTop: "20%", color: "white" }}>
                 <h1>Welcome to GiftTree</h1>
