@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Nav, Container, Col, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -31,24 +31,23 @@ function PageNavBar(props) {
         }
     }, [loggedIn])
 
-
     return (
-        <table style={{ width: "100%" }}>
-            <tbody>
-                <tr>
-                    <td style={{ width: "80%" }}>
-                        <Nav className="mr-auto">
-                            <Nav.Link onClick={handleClickHome}>Home</Nav.Link>{' '}
-                            <Nav.Link onClick={handleClickAbout}>About</Nav.Link>{' '}
-                            <Nav.Link onClick={handleClickMarketplace}>Marketplace</Nav.Link>{' '}
-                        </Nav>
-                    </td>
-                    <td style={{ width: "20%" }} >
-                        {flipButtons}
-                    </td>
-                </tr>
-            </tbody >
-        </table >
+
+        <Container>
+            <Row>
+                <Col>
+                    <Nav>
+                        <Nav.Link onClick={handleClickHome}>Home</Nav.Link>{' '}
+                        <Nav.Link onClick={handleClickAbout}>About</Nav.Link>{' '}
+                        <Nav.Link onClick={handleClickMarketplace}>Marketplace</Nav.Link>{' '}
+                    </Nav>
+                </Col>
+                <Col>
+                    {flipButtons}
+                </Col>
+            </Row>
+
+        </Container>
     )
 }
 

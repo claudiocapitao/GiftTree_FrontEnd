@@ -1,24 +1,23 @@
 import PageNavBar from './PageNavBar';
 import React, { useState, useEffect } from 'react';
 import { Button, Alert, Modal } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
-export default function RegisterPage() {
-    const history = useHistory();
-    const handleClickSubmit = () => history.push('/useraccount');
 
+export default function RegisterPage() {
     const [user_name, setUserName] = useState('');
     const [user_first_name, setFistName] = useState('');
     const [user_last_name, setLasttName] = useState('');
     const [user_email, setEmail] = useState('');
     const [user_password, setPassword] = useState('');
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [showMissing, setShowMissing] = useState(false);
+    const handleCloseShowMissing = () => setShowMissing(false);
+
+    const [showAccountCreated, setShowAccountCreated] = useState(false);
+    const handleCloseShowAccountCreated = () => setShowAccountCreated(false);
 
     const [userNameExists, setUserNameExists] = useState(false);
     const [emailExists, setEmailExists] = useState(false);
-
 
     const makeRequest = async () => {
 
@@ -30,42 +29,58 @@ export default function RegisterPage() {
             user_email
         }
 
-        const response = await fetch('http://localhost:8080/newuser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
+        /* setUserNameB('')
+        setFistNameB('')
+        setLasttNameB('')
+        setEmailB('')
+        setPasswordB('') */
 
-        const userexists = await response.json();
-        console.log(userexists);
-        console.log(userexists.user_exists);
-        console.log(userexists.email_exists);
+        if (!!user_name && !!user_first_name && !!user_last_name && !!user_password && !!user_email) {
+            const response = await fetch('http://localhost:8080/newuser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+            const userexists = await response.json();
 
-        if (!userexists.user_exists && !userexists.email_exists) {
-            setShow(true)
+            if (!userexists.user_exists && !userexists.email_exists) {
+                setShowAccountCreated(true)
+            }
+
+            setUserNameExists(userexists.user_exists);
+            setEmailExists(userexists.email_exists);
+        } else {
+            setShowMissing(true)
         }
-
-        await setUserNameExists(userexists.user_exists);
-        await setEmailExists(userexists.email_exists);
-
-        console.log(userNameExists);
-        console.log(emailExists)
     }
 
     return (
         <div>
             <PageNavBar />
 
+
             <div>
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={showMissing} onHide={handleCloseShowMissing}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>One thing is missing</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>All fields need to be filled</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseShowMissing}>Close </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+
+            <div>
+                <Modal show={showAccountCreated} onHide={handleCloseShowAccountCreated}>
                     <Modal.Header closeButton>
                         <Modal.Title>Succcess</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>Yey, Account was created :)</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>Close </Button>
+                        <Button variant="secondary" onClick={handleCloseShowAccountCreated}>Close </Button>
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -74,7 +89,7 @@ export default function RegisterPage() {
                 <h2>Register: Fill the following form</h2>
 
 
-                <div className="form-group">
+                <div className="form-group" >
                     <label>User name</label>
                     <Alert show={userNameExists} variant='danger'>
                         User name already exists!
@@ -100,7 +115,7 @@ export default function RegisterPage() {
                     <label>Password</label>
                     <input type="password" onChange={(e) => { setPassword(e.target.value) }} className="form-control" placeholder="Enter password" />
                 </div>
-                <Button className="SubmitButton" variant="primary" /* type="submit" */ onClick={makeRequest}>
+                <Button className="SubmitButton" variant="primary" onClick={makeRequest}>
                     Submit
                 </Button>
             </Form>

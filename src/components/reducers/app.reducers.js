@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import { STORE_USER_DATA } from '../actions/app.actions';
+import { STORE_USER_DATA, SHOPPING_CART } from '../actions/app.actions';
 
 const initialState = {
     user: false,
-    loggedIn: false
+    loggedIn: false,
+    shoppingCart: [{ totalItemsInShoppingCart: 0 }]
 };
 
 function appReducer(state = initialState, action) {
@@ -17,7 +18,12 @@ function appReducer(state = initialState, action) {
                 user: action.user,
                 loggedIn: !!action.user
             };
-            console.log(state)
+        case SHOPPING_CART:
+            console.log('Reducer: SHOPPING_CART')
+            return {
+                ...state,
+                shoppingCart: action.shoppingCart
+            };
         default:
             return state;
     }
