@@ -148,7 +148,7 @@ export default function MarketplaceFilter({
                 max={getRange("max", cachedTrees)}
                 value={[range[0], range[1]]}
                 allowCross={false}
-                step={10}
+                step={5}
             />
             <Row>
                 <Col>

@@ -41,7 +41,7 @@ export default function MarketplacePage() {
                             country={tree.COUNTRY}
                             co2Emissions={tree.CO2_EMISSIONS}
                             price={tree.PRICE}
-                            imageLink={tree.IMAGE_URL}
+                            imageLink={tree.TREE_IMG_LINK}
                         />
                     );
                 })}
