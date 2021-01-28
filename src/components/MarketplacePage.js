@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import TreeCard from "./TreeCard.js";
 import PageNavBar from "./PageNavBar";
 import { CardColumns, Col, Row } from "react-bootstrap";
 import MarketplaceFilter from "./MarketplaceFilter";
 
 export default function MarketplacePage() {
+    const history = useHistory();
+    const handleClickCheckout = () => history.push('/checkout');
+
     const [loading, setLoading] = React.useState(true);
     const [cachedTrees, setCachedTrees] = useState([]);
     const [trees, setTrees] = useState([]);
@@ -36,6 +41,7 @@ export default function MarketplacePage() {
                     return (
                         <TreeCard
                             key={tree.TREE_NAME}
+                            tree_id={tree.TREE_ID}
                             treeName={tree.TREE_NAME}
                             treeSpecies={tree.TREE_SPECIES}
                             country={tree.COUNTRY}
@@ -69,10 +75,15 @@ export default function MarketplacePage() {
                     {!trees.length ? (
                         <div>No available trees for your search criteria</div>
                     ) : (
-                        displayTrees(trees)
-                    )}
+                            displayTrees(trees)
+                        )}
                 </Col>
             </Row>
+            <Button
+                className="CardButton"
+                onClick={handleClickCheckout}>
+                Checkout
+            </Button>
         </div>
     );
 }
