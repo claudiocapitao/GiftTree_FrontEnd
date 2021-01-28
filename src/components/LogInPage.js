@@ -23,6 +23,8 @@ function LogInPage(props) {
         const response = await fetch(url);
         const resEmailPass = await response.json(); // should get object {email: true/false, pass: true:false}
 
+        console.log(resEmailPass)
+
         if (resEmailPass.canUserLogIn) {
             await props.actions.storeUserData(resEmailPass.user_id)
             await handleClickAccount();

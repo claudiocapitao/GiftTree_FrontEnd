@@ -17,9 +17,11 @@ function LogOutAccountButtons(props) {
         handleClickLogOut()
     }
 
+    let nItems = props.applicationState.appReducer.shoppingCart[0].totalItemsInShoppingCart
+
     return (
         <div>
-            <Button className="LogInRegisterButtons" variant="login" onClick={handleClickCheckout}>Checkout {props.applicationState.appReducer.shoppingCart[0].totalItemsInShoppingCart} items</Button>
+            <Button className="LogInRegisterButtons" variant="login" onClick={handleClickCheckout}>Checkout {nItems} items</Button>
             <Button className="LogOutAccountButtons" variant="logout" onClick={logOut}>Log out</Button>
             <Button className="LogOutAccountButtons" variant="account" onClick={handleClickAccount}>Account</Button>
         </div>

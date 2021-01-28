@@ -12,9 +12,11 @@ function LogInRegisterButtons(props) {
     const handleClickRegister = () => history.push('/register');
     const handleClickCheckout = () => history.push('/checkout');
 
+    let nItems = props.applicationState.appReducer.shoppingCart[0].totalItemsInShoppingCart
+
     return (
         <div>
-            <Button className="LogInRegisterButtons" variant="login" onClick={handleClickCheckout}>Checkout {props.applicationState.appReducer.shoppingCart[0].totalItemsInShoppingCart} items</Button>
+            <Button className="LogInRegisterButtons" variant="login" onClick={handleClickCheckout}>Checkout {nItems} items</Button>
             <Button className="LogInRegisterButtons" variant="login" onClick={handleClickLogIn}>Log in</Button>
             <Button className="LogInRegisterButtons" variant="register" onClick={handleClickRegister}>Register</Button>
         </div>

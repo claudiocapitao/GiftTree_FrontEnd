@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { STORE_USER_DATA, SHOPPING_CART } from '../actions/app.actions';
+import { STORE_USER_DATA, SHOPPING_CART, RESET_ACTION } from '../actions/app.actions';
 
 const initialState = {
     user: false,
@@ -24,6 +24,9 @@ function appReducer(state = initialState, action) {
                 ...state,
                 shoppingCart: action.shoppingCart
             };
+        case "RESET_REDUX":
+            console.log('Reducer: RESET_REDUX')
+            return initialState; //Always return the initial state
         default:
             return state;
     }
