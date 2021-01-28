@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
-import "./TreeCard.css";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect } from 'react'
+import { Button } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions/app.actions'
 
-function TreeCard(props) {
+function CheckoutPageRows(props) {
     const items = [...(props.applicationState.appReducer.shoppingCart)];
 
     const [quantityOfTrees, setQuantityOfTrees] = useState(0)
@@ -21,9 +19,6 @@ function TreeCard(props) {
     }, [props.applicationState.appReducer.shoppingCart])
 
     const plusItem = () => {
-        /* props.actions.storeShoppingCart([])
-        console.log(props.applicationState.appReducer.shoppingCart) */
-
         let counter = true;
 
         items.map((item) => {
@@ -59,55 +54,25 @@ function TreeCard(props) {
     }
 
     return (
-        <Card
-            className="card"
-            key={props.treeName}
-            border="secondary"
-            style={{ width: "15rem" }}
-        >
-            <Card.Img
-                variant={props.treeName}
-                src={props.imageLink}
-                style={{ width: "100%" }}
-            />
-
-            <Card.Body>
-                <Card.Title
-                    style={{ fontSize: "100%", margin: "0", padding: "0" }}
-                >
-                    <b>{props.treeName}</b>
-                </Card.Title>
-                <Card.Text>Description...</Card.Text>
-            </Card.Body>
-
-            <ListGroup>
-                <ListGroupItem>
-                    Species: <i>{props.treeSpecies}</i>
-                </ListGroupItem>
-                <ListGroupItem>Country: {props.country}</ListGroupItem>
-                <ListGroupItem>
-                    CO2 Emissions: {props.co2Emissions} kg/year
-                </ListGroupItem>
-                <ListGroupItem>
-                    Price: {props.price} €
-                </ListGroupItem>
-            </ListGroup>
-
-            <Button
-                className="CardButton"
-                onClick={minusItem}>
-                -
-            </Button>{' '}
-            {quantityOfTrees}{' '}
-            <Button
-                className="CardButton"
-                onClick={plusItem}>
-                +
-            </Button>
-        </Card>
-    );
+        <tbody>
+            <tr>
+                <td>{props.tree_name}</td>
+                <td>{props.tree_price}</td>
+                <td>
+                    <Button className="CardButton" onClick={minusItem}>
+                        -
+                    </Button>{' '}
+                    {quantityOfTrees}{' '}
+                    <Button className="CardButton" onClick={plusItem}>
+                        +
+                    </Button>
+                </td>
+                <td>{props.tree_price * props.quantity}</td>
+            </tr>
+        </tbody>
+    )
 }
 
 const mapStateToProps = state => ({ applicationState: state });
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actions, dispatch) });
-export default connect(mapStateToProps, mapDispatchToProps)(TreeCard);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPageRows);

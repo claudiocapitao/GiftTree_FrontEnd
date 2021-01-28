@@ -8,6 +8,8 @@ import RegisterPage from './components/RegisterPage.js'
 import AboutPage from './components/AboutPage.js'
 import MarketplacePage from './components/MarketplacePage.js'
 import UserAccountPage from './components/UserAccountPage.js'
+import CheckoutPage from './components/CheckoutPage.js'
+import ReduxResetPage from './components/ReduxResetPage.js'
 
 function App() {
     return (
@@ -20,6 +22,8 @@ function App() {
                     <Route path="/about" component={AboutPage} />
                     <Route path="/marketplace" component={MarketplacePage} />
                     <Route path="/useraccount" component={UserAccountPage} />
+                    <Route path="/checkout" component={CheckoutPage} />
+                    <Route path="/resetredux" component={ReduxResetPage} />
                 </Switch>
             </Router>
         </div>
