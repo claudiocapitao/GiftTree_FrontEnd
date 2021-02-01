@@ -1,8 +1,16 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { FormControl, InputGroup, Row, Button, Col } from "react-bootstrap";
+import {
+    FormControl,
+    InputGroup,
+    Row,
+    Button,
+    Col,
+    Container,
+} from "react-bootstrap";
 import { Range } from "rc-slider";
 import FilterDropdown from "./FilterDropdown.js";
 import "rc-slider/assets/index.css";
+import styles from "./styles/MarketplaceFilter.module.css";
 
 function getRange(type, trees) {
     if (!trees.length) return;
@@ -88,7 +96,7 @@ export default function MarketplaceFilter({
 
     return (
         <Fragment>
-            <Col sm={12}>
+            <Col sm={12} className={`${styles.dropdown}`}>
                 <InputGroup className="mb-3">
                     <FormControl
                         onChange={(e) => {
@@ -101,6 +109,7 @@ export default function MarketplaceFilter({
                     />
                     <InputGroup.Append>
                         <Button
+                            className={`${styles.button}`}
                             onClick={createFilterQuery}
                             variant="outline-secondary"
                         >
@@ -109,8 +118,9 @@ export default function MarketplaceFilter({
                     </InputGroup.Append>
                 </InputGroup>
             </Col>
-            <Col sm={12} justify="flex-start">
+            <Col sm={12} justify="flex-start" className={`${styles.dropdown}`}>
                 <FilterDropdown
+                    className={`${styles.dropdown.button}`}
                     title="Tree Species"
                     data={cachedTrees}
                     type={"TREE_SPECIES"}
@@ -119,7 +129,7 @@ export default function MarketplaceFilter({
                 />
             </Col>
 
-            <Col sm={12} justify="flex-start">
+            <Col sm={12} justify="flex-start" className={`${styles.dropdown}`}>
                 <FilterDropdown
                     title="Country"
                     data={cachedTrees}
@@ -129,7 +139,7 @@ export default function MarketplaceFilter({
                 />
             </Col>
 
-            <Col sm={12} justify="flex-start">
+            <Col sm={12} justify="flex-start" className={`${styles.dropdown}`}>
                 <FilterDropdown
                     title="CO2 Emissions"
                     data={cachedTrees}
@@ -140,6 +150,7 @@ export default function MarketplaceFilter({
             </Col>
 
             <Range
+                className={`${styles.dropdown}`}
                 onChange={(e) => {
                     setRange(e);
                 }}
@@ -150,7 +161,7 @@ export default function MarketplaceFilter({
                 allowCross={false}
                 step={5}
             />
-            <Row>
+            <Row className={`${styles.dropdown}`}>
                 <Col>
                     <InputGroup size="sm">
                         <InputGroup.Prepend>
@@ -183,13 +194,24 @@ export default function MarketplaceFilter({
                     </InputGroup>
                 </Col>
             </Row>
-
-            <Button variant="light" onClick={resetFilters}>
-                Reset
-            </Button>
-            <Button variant="primary" onClick={createFilterQuery}>
-                Apply
-            </Button>
+            <Container>
+                <Row>
+                    <Col sm={6} className={`${styles.pad} ${styles.padright}`}>
+                        <Button variant="light" onClick={resetFilters}>
+                            Reset
+                        </Button>
+                    </Col>
+                    <Col sm={6} className={`${styles.pad} ${styles.padleft}`}>
+                        <Button
+                            variant="success"
+                            className={`${styles.button}`}
+                            onClick={createFilterQuery}
+                        >
+                            Apply
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
         </Fragment>
     );
 }

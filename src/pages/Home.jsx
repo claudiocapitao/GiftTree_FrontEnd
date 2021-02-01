@@ -24,7 +24,10 @@ export function Home() {
 
             <div style={{ paddingTop: "20%", color: "white" }}>
                 <h1>Welcome to GiftTree</h1>
-                <h2>Lorem ipsum dolor sit amet</h2>
+                <h2>
+                    Buy a tree, choose a location to plant it and gift the
+                    certificate to your dearest one.
+                </h2>
                 <Button />
             </div>
         </div>

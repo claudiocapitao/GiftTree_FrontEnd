@@ -1,0 +1,39 @@
+.button {
+    position: relative;
+    border: none;
+    border-radius: 2px;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    background: #23aa76;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.button span {
+    z-index: 8;
+    position: relative;
+}
+
+.button:hover {
+    background: #06d485 !important;
+}
+
+.button:visited {
+    background: #057e50 !important;
+}
+
+.dropdown {
+    padding-bottom: 20px;
+}
+
+.pad {
+    padding-top: 10px;
+}
+.padright {
+    padding-right: 5px;
+}
+
+.padleft {
+    padding-left: 5px;
+}

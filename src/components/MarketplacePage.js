@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect, useInterval } from "react";
+import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import TreeCard from "./TreeCard.js";
 import PageNavBar from "./PageNavBar";
 import { CardColumns, Col, Row } from "react-bootstrap";
 import MarketplaceFilter from "./MarketplaceFilter";
+import styles from "./styles/MarketplacePage.module.css";
 
 export default function MarketplacePage() {
     const history = useHistory();
-    const handleClickCheckout = () => history.push('/checkout');
+    const handleClickCheckout = () => history.push("/checkout");
 
     const [loading, setLoading] = React.useState(true);
     const [cachedTrees, setCachedTrees] = useState([]);
     const [trees, setTrees] = useState([]);
+
+    const [bSize, setBSize] = useState("sm");
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBSize(new Date().getTime() % 2 === 0 ? "#23aa76" : "green");
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         setLoading(true);
@@ -60,30 +70,48 @@ export default function MarketplacePage() {
     }
 
     return (
-        <div>
+        <div className={`${styles.page}`}>
             <PageNavBar />
-            <h2>Buy a tree, make someone smile and help the world :)</h2>
-            <Row>
-                <Col xs={2}>
-                    <MarketplaceFilter
-                        cachedTrees={cachedTrees}
-                        performFilteredQuery={performFilteredQuery}
-                    />
-                </Col>
-
-                <Col xs={10}>
-                    {!trees.length ? (
-                        <div>No available trees for your search criteria</div>
-                    ) : (
+            <h2 className={`${styles.header}`}>
+                Gift a tree to your dearest and help the world :)
+            </h2>
+            <div className={`${styles.elements}`}>
+                <Row>
+                    <Col xs={2}>
+                        <MarketplaceFilter
+                            cachedTrees={cachedTrees}
+                            performFilteredQuery={performFilteredQuery}
+                        />
+                    </Col>
+                    <Col
+                        style={{ maxWidth: "1000px", margin: "0 auto" }}
+                        xs={10}
+                    >
+                        {!trees.length ? (
+                            <div>
+                                No available trees for your search criteria
+                            </div>
+                        ) : (
                             displayTrees(trees)
                         )}
-                </Col>
-            </Row>
-            <Button
-                className="CardButton"
-                onClick={handleClickCheckout}>
-                Checkout
-            </Button>
+                    </Col>
+                </Row>
+
+                <div style={{ margin: "100px" }}>
+                    <Button
+                        style={{
+                            background: `${bSize}`,
+                            transition: "all 0.8s",
+                        }}
+                        size="lg"
+                        variant="success"
+                        className={`${styles.button}`}
+                        onClick={handleClickCheckout}
+                    >
+                        Checkout
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 }

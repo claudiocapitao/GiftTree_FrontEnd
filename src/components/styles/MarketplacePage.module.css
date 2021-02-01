@@ -1,0 +1,37 @@
+.page {
+    background-color: #fff5e7;
+}
+
+.elements {
+    margin-left: 20px;
+    margin-top: 5rem;
+}
+
+.header {
+    padding-top: 3rem;
+}
+
+.button {
+    position: relative;
+    border: none;
+    border-radius: 2px;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    background: #23aa76;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.button span {
+    z-index: 8;
+    position: relative;
+}
+
+.button:hover {
+    background: #06d485 !important;
+}
+
+.button:visited {
+    background: #057e50 !important;
+}
